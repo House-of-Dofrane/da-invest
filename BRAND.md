@@ -88,6 +88,12 @@ structural move taken from the reference analysis, executed with our own numbers
 **Rules.** Line height is set by role, never by size — 1.10 display, 1.15-1.20 statement, 1.55
 prose. Tracking is negative everywhere except the eyebrow. Display appears exactly once per page.
 
+**The mark.** Not locked, and **not mine to make.** The Chairman is building the Dofrane
+Acquisitions logo in conjunction with Alara (CMO). No logo, monogram, wordmark or favicon is
+generated for this surface by any other seat. Until it lands, the build carries a typographic
+holding mark that is visibly a placeholder and is never presented as the identity. **Open line item,
+owner: Dofrane + Alara, opened 2026-09-09.**
+
 **Faces.** Not locked. The playbook defers the type decision and that deferral stands — Fraunces +
 Inter remain a placeholder, not a decision. This build ships on a system stack until the call is
 made, and every size above is face-independent. What is decided: **one display face with real
