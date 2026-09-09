@@ -1,0 +1,274 @@
+<title>Acquisitions Site Gate 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --navy:#0F1729; --raised:#151E33; --line:#243252;
+    --blue:#3B82F6; --gold:#D4A853; --green:#059669; --amber:#D97706; --red:#DC2626;
+    --fg:#E8ECF5; --fg-mid:#A9B8D4; --fg-dim:#7286A8;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono","SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--navy);color:var(--fg);font-family:var(--body);
+    font-size:15px;line-height:1.6;margin:0;padding:0 20px 72px;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto}
+  a{color:var(--blue)}
+
+  header{padding:40px 0 28px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--fg-dim);margin:0 0 14px}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,7vw,46px);
+    line-height:1.08;letter-spacing:-.015em;margin:0 0 12px;text-wrap:balance}
+  .sub{color:var(--fg-mid);margin:0;max-width:60ch}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;
+    font-family:var(--mono);font-size:11.5px;color:var(--fg-dim)}
+
+  h2{font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-.01em;
+    margin:52px 0 6px}
+  h2 .n{font-family:var(--mono);font-size:11px;color:var(--fg-dim);
+    letter-spacing:.12em;display:block;margin-bottom:8px;text-transform:uppercase}
+  .lede{color:var(--fg-mid);margin:0 0 20px;max-width:66ch}
+
+  .verdict{background:var(--raised);border-left:3px solid var(--gold);
+    padding:20px 22px;margin:26px 0 0;border-radius:0 4px 4px 0}
+  .verdict p{margin:0;font-family:var(--display);font-size:19px;line-height:1.45}
+  .verdict p+p{margin-top:12px;font-family:var(--body);font-size:14.5px;color:var(--fg-mid)}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0 0}
+  .tile{background:var(--raised);padding:16px 18px}
+  .tile .id{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    color:var(--fg-dim);text-transform:uppercase}
+  .tile .val{font-family:var(--display);font-size:20px;line-height:1.25;margin:7px 0 4px}
+  .tile .note{font-size:12.5px;color:var(--fg-mid);line-height:1.5}
+  .tile.ruled .val{color:var(--gold)}
+
+  figure{margin:26px 0 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:12.5px;color:var(--fg-dim);margin-top:12px;max-width:68ch}
+  .scroller{overflow-x:auto}
+
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:20px}
+  th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--fg-dim);font-weight:500;
+    padding:0 14px 8px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:9px 14px 9px 0;border-bottom:1px solid #1B2540;vertical-align:top}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.fail td{background:rgba(220,38,38,.09)}
+  tr.fail td.num{color:#FF8A8A;font-weight:700}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;
+    white-space:nowrap}
+  .p-pass{background:rgba(5,150,105,.16);color:#34D399}
+  .p-open{background:rgba(220,38,38,.16);color:#FF8A8A}
+  .p-tap{background:rgba(217,119,6,.16);color:#FBBF24}
+  .p-info{background:rgba(59,130,246,.16);color:#7FB0FF}
+
+  ul.findings{list-style:none;padding:0;margin:20px 0 0;
+    display:flex;flex-direction:column;gap:1px;background:var(--line);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  ul.findings li{background:var(--raised);padding:13px 16px;
+    display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start}
+  ul.findings .fid{font-family:var(--mono);font-size:11.5px;font-weight:700;
+    color:var(--gold);padding-top:2px}
+  ul.findings li.gap .fid{color:#FF8A8A}
+  ul.findings .txt{font-size:13.5px;line-height:1.55}
+  ul.findings .txt b{font-weight:600}
+  ul.findings .txt .after{display:block;color:var(--fg-mid);margin-top:3px}
+
+  .ladder{display:flex;flex-direction:column;gap:2px;margin-top:22px}
+  .ladder div{background:var(--raised);padding:7px 14px;display:flex;
+    align-items:baseline;gap:14px;border-left:2px solid var(--gold)}
+  .ladder .sz{font-family:var(--mono);font-size:11px;color:var(--fg-dim);
+    width:74px;flex:none;font-variant-numeric:tabular-nums}
+  .ladder .spec{font-family:var(--display);color:var(--fg);line-height:1;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ladder .role{font-family:var(--mono);font-size:10.5px;color:var(--fg-dim);
+    margin-left:auto;flex:none;letter-spacing:.08em;text-transform:uppercase}
+
+  .ask{background:var(--raised);border:1px solid var(--amber);border-radius:4px;
+    padding:20px 22px;margin-top:26px}
+  .ask h3{font-family:var(--display);font-size:19px;margin:0 0 10px;font-weight:500}
+  .ask ol{margin:0;padding-left:20px}
+  .ask li{margin-bottom:9px;font-size:14px}
+  .ask code{font-family:var(--mono);font-size:12.5px;background:#0B1120;
+    padding:2px 6px;border-radius:2px;color:var(--gold)}
+
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;color:var(--fg-dim);
+    display:flex;flex-wrap:wrap;gap:6px 18px}
+  @media (max-width:560px){
+    .ladder .spec{font-size:16px!important}
+    ul.findings li{grid-template-columns:44px 1fr;gap:10px}
+  }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Phase 0 · Gate 1 · Elakai to the Chairman</p>
+  <h1>Dofrane Acquisitions investor site</h1>
+  <p class="sub">The audit found the directive's repo absent, its site framework-less, and its
+  audience mismatched. Four rulings resolved all three. The skeleton is measured; the brand
+  system is set; nothing is deployed.</p>
+  <div class="meta">
+    <span>09 SEP 2026</span><span>DIRECTIVE 07 SEP</span>
+    <span>REPO da-invest</span><span>COMMIT 01700f7</span>
+  </div>
+</header>
+
+<div class="verdict">
+  <p>Phase 0 complete. Gate 1 open. One thing needed from you: the analysis API keys.</p>
+  <p>The seller funnel is untouched and still scores 100. The investor surface is a new build
+  beside it, scaffolded on Next&nbsp;16 and Tailwind&nbsp;v4, with its brand system and the
+  reference's structural skeleton both committed.</p>
+</div>
+
+<h2><span class="n">Section one</span>The four rulings</h2>
+<p class="lede">Taken 09 September on the Phase 0 findings. Each closed a decision the directive
+could not have anticipated.</p>
+<div class="tiles">
+  <div class="tile ruled"><div class="id">D6 · Site identity</div>
+    <div class="val">Two surfaces</div>
+    <div class="note">da-web stays the seller funnel. Investor site is a separate build.</div></div>
+  <div class="tile ruled"><div class="id">D7 · Host</div>
+    <div class="val">Vercel, by exception</div>
+    <div class="note">Seventh-connector exception of record, precedent F04.</div></div>
+  <div class="tile ruled"><div class="id">D8 · Tailwind</div>
+    <div class="val">v4, house pattern</div>
+    <div class="note">Matches hod-dashboards. Creates corrections C10 and C11.</div></div>
+  <div class="tile ruled"><div class="id">D9 · Components</div>
+    <div class="val">Six received</div>
+    <div class="note">All nine of your defects verified in the real code.</div></div>
+</div>
+
+<h2><span class="n">Section two</span>The rhythm, measured</h2>
+<p class="lede">The reference runs 8,921&nbsp;px against an 827&nbsp;px viewport — 10.79 screens
+across roughly twelve bands. Measured directly in the browser, not inferred from generated code.
+Band height is the structural signal: two lengths alternate, and exactly one anchor breaks them.</p>
+
+<figure>
+<div class="scroller">
+<svg viewBox="0 0 780 268" role="img" aria-label="Band heights in viewport multiples across the reference page">
+  <line x1="30" y1="220" x2="762" y2="220" stroke="#243252" stroke-width="1"/>
+  <line x1="30" y1="126.5" x2="762" y2="126.5" stroke="#3B82F6" stroke-width="1"
+        stroke-dasharray="3 4" opacity=".65"/>
+  <text x="766" y="130" fill="#7FB0FF" font-family="JetBrains Mono, monospace"
+        font-size="9" text-anchor="end" opacity=".9">1.00 screen</text>
+
+  <rect x="30"  y="126.5" width="40" height="93.5"  fill="#3B82F6"/>
+  <rect x="78"  y="165.8" width="40" height="54.2"  fill="#4A6FA5"/>
+  <rect x="126" y="80.7"  width="40" height="139.3" fill="#D4A853"/>
+  <rect x="174" y="122.8" width="40" height="97.2"  fill="#D4A853"/>
+  <rect x="222" y="172.3" width="40" height="47.7"  fill="#4A6FA5"/>
+  <rect x="270" y="138.7" width="40" height="81.3"  fill="#D4A853"/>
+  <rect x="318" y="140.6" width="40" height="79.4"  fill="#D4A853"/>
+  <rect x="366" y="20"    width="40" height="200"   fill="#F0C877"/>
+  <rect x="414" y="95.7"  width="40" height="124.3" fill="#D4A853"/>
+  <rect x="462" y="163.9" width="40" height="56.1"  fill="#4A6FA5"/>
+  <rect x="510" y="131.2" width="40" height="88.8"  fill="#D4A853"/>
+  <rect x="558" y="171.4" width="40" height="48.6"  fill="#4A6FA5"/>
+  <rect x="606" y="84.5"  width="40" height="135.5" fill="#D4A853"/>
+  <rect x="654" y="143.4" width="40" height="76.6"  fill="#D4A853"/>
+  <rect x="702" y="132.1" width="40" height="87.9"  fill="#8A93A8"/>
+
+  <g font-family="JetBrains Mono, monospace" font-size="9.5" fill="#A9B8D4" text-anchor="middle">
+    <text x="50"  y="120.5">1.00</text><text x="98"  y="159.8">.58</text>
+    <text x="146" y="74.7">1.49</text> <text x="194" y="116.8">1.04</text>
+    <text x="242" y="166.3">.51</text> <text x="290" y="132.7">.87</text>
+    <text x="338" y="134.6">.85</text> <text x="386" y="14" fill="#F0C877" font-weight="700">2.14</text>
+    <text x="434" y="89.7">1.33</text> <text x="482" y="157.9">.60</text>
+    <text x="530" y="125.2">.95</text> <text x="578" y="165.4">.52</text>
+    <text x="626" y="78.5">1.45</text> <text x="674" y="137.4">.82</text>
+    <text x="722" y="126.1">.94</text>
+  </g>
+  <g font-family="JetBrains Mono, monospace" font-size="8.5" fill="#7286A8" text-anchor="middle">
+    <text x="50" y="234">ARRIVE</text><text x="98" y="234">STMT</text>
+    <text x="146" y="234">3</text><text x="194" y="234">4</text>
+    <text x="242" y="234">STMT</text><text x="290" y="234">6</text>
+    <text x="338" y="234">7</text>
+    <text x="386" y="234" fill="#F0C877" font-weight="700">ANCHOR</text>
+    <text x="434" y="234">9</text><text x="482" y="234">STMT</text>
+    <text x="530" y="234">11</text><text x="578" y="234">STMT</text>
+    <text x="626" y="234">13</text><text x="674" y="234">14</text>
+    <text x="722" y="234">CLOSE</text>
+  </g>
+  <text x="30" y="256" font-family="JetBrains Mono, monospace" font-size="9" fill="#7286A8">
+    band height in viewport multiples · left to right is scroll depth
+  </text>
+</svg>
+</div>
+<figcaption>Statement bands (muted blue) hold at 0.51–0.60 screens. Content bands (gold) run
+0.82–1.49. The single anchor at 2.14 sits at 49% of scroll depth — the midpoint. Two tall bands
+never sit adjacent. The arrival band is exactly one screen, never more.</figcaption>
+</figure>
+
+<h2><span class="n">Section three</span>Type scale</h2>
+<p class="lede">Nine steps, ratios averaging 1.28, with the display step deliberately breaking the
+scale at 3.14×. That break is the loudest structural move on the reference and the one most worth
+taking. Sizes are ours; the ratios are what was extracted.</p>
+<div class="ladder">
+  <div><span class="sz">176 / 1.10</span><span class="spec" style="font-size:34px">Display</span><span class="role">3.14× break</span></div>
+  <div><span class="sz">56 / 1.15</span><span class="spec" style="font-size:26px">Statement lg</span><span class="role">1.27</span></div>
+  <div><span class="sz">44 / 1.20</span><span class="spec" style="font-size:22px">Statement</span><span class="role">1.29</span></div>
+  <div><span class="sz">34 / 1.20</span><span class="spec" style="font-size:19px">Heading</span><span class="role">1.31</span></div>
+  <div><span class="sz">26 / 1.40</span><span class="spec" style="font-size:17px">Lead</span><span class="role">1.30</span></div>
+  <div><span class="sz">20 / 1.55</span><span class="spec" style="font-size:15px">Body large</span><span class="role">1.18</span></div>
+  <div><span class="sz">17 / 1.55</span><span class="spec" style="font-size:14px">Body</span><span class="role">1.31</span></div>
+  <div><span class="sz">13 / 1.20</span><span class="spec" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase">Eyebrow</span><span class="role">only + tracking</span></div>
+</div>
+
+<h2><span class="n">Section four</span>Contrast, computed not assumed</h2>
+<p class="lede">Dark-first inverts which colour does which job. One measured result governs the
+whole system.</p>
+<div class="scroller">
+<table>
+  <thead><tr><th>Pair</th><th>Ratio</th><th>Verdict</th><th>Consequence</th></tr></thead>
+  <tbody>
+    <tr><td>ivory on ink</td><td class="num">16.07</td><td><span class="pill p-pass">AAA</span></td><td>Primary type on ground</td></tr>
+    <tr><td>champagne on ink</td><td class="num">14.78</td><td><span class="pill p-pass">AAA</span></td><td>The accent that carries on dark</td></tr>
+    <tr><td>silver on ink</td><td class="num">11.84</td><td><span class="pill p-pass">AAA</span></td><td>Secondary type, rules</td></tr>
+    <tr><td>ivory on oxblood</td><td class="num">9.49</td><td><span class="pill p-pass">AAA</span></td><td>Type sits on the fill</td></tr>
+    <tr><td>champagne on oxblood</td><td class="num">8.72</td><td><span class="pill p-pass">AAA</span></td><td>Accent on the fill</td></tr>
+    <tr class="fail"><td><b>oxblood on ink</b></td><td class="num">1.69</td><td><span class="pill p-open">Fail</span></td><td><b>Prohibited.</b> Oxblood is a fill, never type</td></tr>
+    <tr class="fail"><td><b>oxblood on raised surface</b></td><td class="num">1.56</td><td><span class="pill p-open">Fail</span></td><td>Worse. Same prohibition</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2><span class="n">Section five</span>Findings</h2>
+<p class="lede">Eleven from the audit, nine more from reading the component code you sent. Gaps are
+named, none are hidden.</p>
+<ul class="findings">
+  <li class="gap"><span class="fid">F01</span><span class="txt"><b>Audience mismatch.</b> The live site sells to Maryland sellers under a no-solicitation constraint; the directive described an investor site.<span class="after">Closed by ruling D6 — two surfaces.</span></span></li>
+  <li><span class="fid">F07</span><span class="txt"><b>Directive corrected.</b> No CAIO directive requires one source of truth for the start command; the documented convention is deliberate duplication, added after Railpack failed on 04 Sep.<span class="after">Moot under D7, recorded for the estate.</span></span></li>
+  <li><span class="fid">F09</span><span class="txt"><b>Named repo does not exist.</b> No <code>dofrane-acquisitions</code> under any casing. The seller site is <code>da-web</code>; this build is the new <code>da-invest</code>.</span></li>
+  <li class="gap"><span class="fid">F10</span><span class="txt"><b>The performance bar is a regression.</b> The directive sets Lighthouse mobile above 85. The seller page scores 100 at 7.4&nbsp;KB. A WebGL hero adds roughly 600&nbsp;KB before the rest of the stack.<span class="after">Acceptable on an investor surface, knowingly. The reference itself uses video and type — no canvas at all.</span></span></li>
+  <li class="gap"><span class="fid">B01</span><span class="txt"><b>The hero's headline reveal never runs.</b> Its character-splitting function is defined and never called, so the stagger animates an empty set. Beyond your nine — logged, not touched.</span></li>
+  <li><span class="fid">B03–B09</span><span class="txt"><b>Eight more logged.</b> Missing client directive, hydration mismatch, three undisposed WebGL objects, a v3-only gradient that silently vanishes on v4, CDN stock imagery, a type error under strict, and a package-name trap.</span></li>
+  <li><span class="fid">C10–C11</span><span class="txt"><b>Two corrections created by D8.</b> The theme-switcher's config is inert on Tailwind v4; its tokens move into the CSS layer and its borrowed greys are replaced with your palette.</span></li>
+</ul>
+
+<h2><span class="n">Section six</span>What needs you</h2>
+<div class="ask">
+  <h3>One thing to unblock Phase 1, three that wait</h3>
+  <ol>
+    <li><span class="pill p-tap">Now</span> &nbsp;<b>Analysis API keys.</b> Gemini for asset extraction, Replicate for image editing. You paste them; I never handle them. Everything else in Phase 1 is done.</li>
+    <li><span class="pill p-info">Gate 1</span> &nbsp;<b>Where the investor surface lives.</b> Subdomain of the seller domain, or its own. I build against a preview URL until you say.</li>
+    <li><span class="pill p-info">Phase 5</span> &nbsp;<b>The GoDaddy A record.</b> Still yours, still pending, still pointed at GoDaddy.</li>
+    <li><span class="pill p-info">Phase 5</span> &nbsp;<b>Counsel on investor copy</b> before anything describing participation in a deal goes live.</li>
+  </ol>
+</div>
+
+<h2><span class="n">Section seven</span>What does not move</h2>
+<p class="lede">The seller funnel is not touched by any of this. It stays static HTML at 7.4&nbsp;KB,
+Lighthouse 100, LCP 0.8&nbsp;s, with every Maryland citation intact. Its lead flow is the wholesale
+desk's only channel and this build does not go near it.</p>
+
+<footer>
+  <span>ELAKAI · CEO</span><span>PHASE 0 CLOSED</span>
+  <span>GATE 1 OPEN</span><span>NOTHING DEPLOYED</span>
+</footer>
+</div>
