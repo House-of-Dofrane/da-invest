@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# da-invest
 
-## Getting Started
+Dofrane Acquisitions — investor surface.
 
-First, run the development server:
+Next.js 16 + Tailwind v4 + shadcn, TypeScript strict. `pnpm install && pnpm dev`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What this is, and what it is not
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This is the **investor-facing** surface: commercial real estate acquisition and asset management,
+addressed to HNW individuals, institutional investors, developers and operators.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+It is **not** the seller funnel. That is `House-of-Dofrane/da-web`, serving Maryland sellers in
+Montgomery and Prince George's counties, and it is deliberately untouched by this build — static
+HTML, 7.4 KB, Lighthouse 100. The two surfaces do not share copy, tone, or audience.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Standing constraints
 
-## Learn More
+- **No fabricated numbers.** Every figure on the page is real or marked illustrative.
+- **No stock photography** standing in for real assets. Placeholders are labelled as placeholders.
+- **Securities-adjacent copy is gated** on counsel before production.
+- Dark-first. Locked HOD palette. See `BRAND.md` — it is the source for every token.
 
-To learn more about Next.js, take a look at the following resources:
+## Documents
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| File | What it settles |
+|---|---|
+| `BRAND.md` | Palette, measured contrast, type scale, spacing, motion, copy voice |
+| `PATTERNS.md` | Structural analysis of the reference — rhythm, ratios, compositions |
+| `CONNECTORS.md` | Connector law and the Vercel exception of record |
