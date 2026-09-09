@@ -36,3 +36,13 @@ there, whereas Vercel forces a $20/mo upgrade — is answered by keeping this re
 ruling already taken for `da-web`.
 
 Any further connector requires a new written exception before code lands.
+
+## Deploy record
+
+| Date | Target | URL | Notes |
+|---|---|---|---|
+| 2026-09-09 | Vercel, team HOD (`hod6`), project `da-invest` | `da-invest-q9iybf25d-hod6.vercel.app` | First deployment. Vercel assigns a project's first deployment to Production by its own rule — `--prod` was not passed. Deployment Protection (SSO) is on, so the URL is readable only when signed in to the Vercel team. No custom domain is attached. |
+
+`dofraneacquisitions.com` is **not** attached to this project and still resolves to
+GoDaddy (`13.248.243.5`, `76.223.105.230`). That domain belongs to the seller
+surface. Where the investor surface lives is an open decision — see A-ii.
