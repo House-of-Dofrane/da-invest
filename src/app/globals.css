@@ -128,3 +128,212 @@
     @apply font-sans;
   }
 }
+/* ==========================================================================
+   DOFRANE ACQUISITIONS — brand layer. Authority: BRAND.md. Do not edit values
+   here; edit BRAND.md and mirror. Dark is the default; light is the alternate.
+   ========================================================================== */
+
+:root {
+  /* Locked palette — HOD Brand Playbook v1 §4, 2026-07-28 */
+  --da-ink:       #14100F;
+  --da-surface:   #1E1917;
+  --da-oxblood:   #6E1E2A;
+  --da-champagne: #EFE3C0;
+  --da-silver:    #C9CDD2;
+  --da-ivory:     #F3ECDD;
+
+  /* Type scale (BRAND.md §2) */
+  --t-display: clamp(3.75rem, 13vw, 11rem);
+  --t-statement-lg: clamp(2.25rem, 5vw, 3.5rem);
+  --t-statement: clamp(1.875rem, 3.6vw, 2.75rem);
+  --t-heading: clamp(1.5rem, 2.6vw, 2.125rem);
+  --t-lead: clamp(1.125rem, 1.9vw, 1.625rem);
+  --t-body-lg: 1.25rem;
+  --t-body: 1.0625rem;
+  --t-eyebrow: 0.8125rem;
+
+  /* Spacing scale (BRAND.md §3) — 8 base, ~1.6 step */
+  --s1: 8px;  --s2: 16px; --s3: 24px; --s4: 40px;
+  --s5: 64px; --s6: 104px; --s7: 168px;
+
+  /* Motion (BRAND.md §4) */
+  --e-reveal: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --e-display: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --d-reveal: 1200ms; --d-display: 1500ms; --d-shift: 800ms; --d-hover: 400ms;
+}
+
+/* Light alternate */
+:root {
+  --background: var(--da-ivory);
+  --foreground: var(--da-ink);
+  --card: color-mix(in oklab, var(--da-ivory) 88%, white);
+  --card-foreground: var(--da-ink);
+  --popover: var(--da-ivory);
+  --popover-foreground: var(--da-ink);
+  --primary: var(--da-oxblood);
+  --primary-foreground: var(--da-ivory);
+  --secondary: color-mix(in oklab, var(--da-ivory) 82%, var(--da-ink));
+  --secondary-foreground: var(--da-ink);
+  --muted: color-mix(in oklab, var(--da-ivory) 90%, var(--da-ink));
+  --muted-foreground: color-mix(in oklab, var(--da-ink) 68%, var(--da-ivory));
+  --accent: var(--da-champagne);
+  --accent-foreground: var(--da-ink);
+  --border: color-mix(in oklab, var(--da-ink) 14%, transparent);
+  --input: color-mix(in oklab, var(--da-ink) 18%, transparent);
+  --ring: var(--da-oxblood);
+
+  /* theme-switcher tokens — C10: were Vercel greys, now on-palette */
+  --ds-gray-700: color-mix(in oklab, var(--da-ink) 55%, var(--da-ivory));
+  --ds-gray-1000: var(--da-ink);
+  --ds-shadow: color-mix(in oklab, var(--da-ink) 16%, transparent);
+}
+
+/* Dark — the default for this surface */
+.dark {
+  --background: var(--da-ink);
+  --foreground: var(--da-ivory);
+  --card: var(--da-surface);
+  --card-foreground: var(--da-ivory);
+  --popover: var(--da-surface);
+  --popover-foreground: var(--da-ivory);
+  --primary: var(--da-oxblood);
+  --primary-foreground: var(--da-ivory);
+  --secondary: var(--da-surface);
+  --secondary-foreground: var(--da-ivory);
+  --muted: color-mix(in oklab, var(--da-surface) 88%, var(--da-ivory));
+  --muted-foreground: var(--da-silver);
+  --accent: var(--da-champagne);
+  --accent-foreground: var(--da-ink);
+  --border: color-mix(in oklab, var(--da-ivory) 12%, transparent);
+  --input: color-mix(in oklab, var(--da-ivory) 18%, transparent);
+  --ring: var(--da-champagne);
+
+  --ds-gray-700: color-mix(in oklab, var(--da-ivory) 58%, var(--da-ink));
+  --ds-gray-1000: var(--da-ivory);
+  --ds-shadow: color-mix(in oklab, var(--da-ivory) 18%, transparent);
+}
+
+@theme inline {
+  --color-da-ink: var(--da-ink);
+  --color-da-surface: var(--da-surface);
+  --color-da-oxblood: var(--da-oxblood);
+  --color-da-champagne: var(--da-champagne);
+  --color-da-silver: var(--da-silver);
+  --color-da-ivory: var(--da-ivory);
+  --color-gray-700: var(--ds-gray-700);
+  --color-gray-1000: var(--ds-gray-1000);
+  --color-shadow: var(--ds-shadow);
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; background: var(--da-ink); }
+
+/* Faces. next/font defines --font-fraunces and --font-inter on <body> via its
+   generated class, not on :root — declaring these at :root referenced an
+   undefined variable, invalidated the whole declaration, and dropped .hero-title
+   to the body face. Declared at body scope so they actually resolve. */
+body {
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+.dark body, body { background: var(--background); color: var(--foreground); }
+::selection { background: var(--da-oxblood); color: var(--da-ivory); }
+
+/* ---------- Hero. Correction 1: these 15 classes ship with no stylesheet. --- */
+
+.hero-container { position: relative; width: 100%; background: var(--da-ink); }
+.hero-canvas {
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  z-index: 0; display: block; pointer-events: none;
+}
+.hero-container::after {
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--da-ink) 34%, transparent) 0%, transparent 18%, transparent 62%, var(--da-ink) 100%);
+}
+
+.side-menu {
+  transition: opacity var(--d-shift) var(--e-reveal);
+  position: fixed; left: var(--s3); top: 50%; transform: translateY(-50%);
+  z-index: 20; display: flex; flex-direction: column; align-items: center;
+  gap: var(--s4); mix-blend-mode: difference;
+}
+.menu-icon { display: flex; flex-direction: column; gap: 5px; }
+.menu-icon span { display: block; width: 22px; height: 1px; background: var(--da-ivory); }
+.vertical-text {
+  writing-mode: vertical-rl; font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--da-ivory); opacity: 0.75;
+}
+
+.hero-content, .content-section {
+  position: relative; z-index: 10; height: 100vh; width: 100%;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 var(--s4) 0 clamp(var(--s4), 9vw, 140px);
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: var(--t-display); line-height: 1.02;
+  letter-spacing: -0.045em; color: var(--da-ivory);
+  margin: 0; text-transform: uppercase; overflow: hidden;
+}
+.title-char { display: inline-block; will-change: transform, opacity; }
+.hero-subtitle {
+  margin-top: var(--s3); max-width: 34ch;
+  font-family: var(--font-sans); font-size: var(--t-lead);
+  line-height: 1.45; letter-spacing: -0.02em;
+  color: color-mix(in oklab, var(--da-ivory) 78%, var(--da-ink));
+}
+.subtitle-line { margin: 0; }
+.subtitle-line + .subtitle-line { margin-top: 2px; }
+.cosmos-subtitle { border-left: 1px solid var(--da-oxblood); padding-left: var(--s3); }
+
+.scroll-progress {
+  transition: opacity var(--d-shift) var(--e-reveal);
+  position: fixed; right: var(--s4); bottom: var(--s4); z-index: 20;
+  display: flex; align-items: center; gap: var(--s2);
+  font-family: var(--font-sans); font-size: 10.5px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: color-mix(in oklab, var(--da-ivory) 70%, var(--da-ink));
+}
+.scroll-text { white-space: nowrap; }
+.progress-track {
+  width: clamp(80px, 14vw, 190px); height: 1px;
+  background: color-mix(in oklab, var(--da-ivory) 22%, transparent);
+}
+.progress-fill {
+  height: 100%; background: var(--da-champagne);
+  transition: width var(--d-shift) var(--e-reveal);
+}
+.section-counter { font-variant-numeric: tabular-nums; color: var(--da-champagne); }
+.scroll-sections { position: relative; z-index: 10; }
+
+@media (max-width: 767px) {
+  .side-menu { display: none; }
+  .scroll-progress { right: var(--s3); bottom: var(--s3); gap: var(--s1); }
+  .progress-track { width: 56px; }
+  .hero-content, .content-section { padding: 0 var(--s3); }
+}
+
+/* The sky. Painted, not simulated — it was a 20,000-triangle additive plane whose
+   bright core bloomed into a shaft centre-frame. This is deterministic, costs
+   nothing, and serves both the WebGL and the static hero (§6). */
+.hero-sky {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(96% 62% at 50% 52%,
+      color-mix(in oklab, var(--da-oxblood) 88%, transparent) 0%,
+      color-mix(in oklab, var(--da-oxblood) 52%, transparent) 26%,
+      color-mix(in oklab, var(--da-oxblood) 18%, transparent) 52%,
+      transparent 74%),
+    linear-gradient(180deg, #0A0808 0%, #1A1210 40%, var(--da-ink) 72%, #090707 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important; transition-duration: 0.001ms !important;
+  }
+  .progress-fill { transition: none; }
+}
